@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "af3fae65-f96a-4b7f-a868-e2f12cbeec44",
+		"name": "Avaliação Softtek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "people/name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function name() {\r",
+							"\r",
+							"  var name = [\"1\", \"2\", \"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\" ]; \r",
+							"  \r",
+							" var randomItem = name[Math.floor(Math.random() * name.length)];\r",
+							" \r",
+							" return randomItem;\r",
+							"}\r",
+							" pm.environment.set(\"name\", name());"
+						],
+						"type": "text/javascript",
+						"id": "5b3df782-0272-4ec5-b6f7-a0d8f894cf10"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check name is true\", function () {\r",
+							"    pm.expect(pm.environment.get(\"name\")).to.eql;\r",
+							"});\r",
+							"\r",
+							"console.log(JSON.parse(responseBody).name)\r",
+							"\r",
+							"pm.test(\"Check height is true\", function () {\r",
+							"    pm.expect(pm.environment.get(\"height\")).to.eql;\r",
+							"});\r",
+							"\r",
+							"console.log(JSON.parse(responseBody).height)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "a6828916-ca7b-44b3-b6c0-747bb011103e"
+					}
+				}
+			],
+			"_postman_id": "f87ce58f-9bea-4e0a-9e6f-60d58399dda0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/{{name}}",
+				"description": "funcionalidade acessar apenas um item da lista\n\nCT01- \n\nDado que acesso a API\nQuando adicionar um parametro name\nEntao o sistema ira retornar um item por vez da lista name"
+			},
+			"response": []
+		},
+		{
+			"name": "https://swapi.dev/api/people/100",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Not failing\", function () {\r",
+							"    pm.expect(404).to.eql(404);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "cb3b23ca-1e87-4424-a6e8-aecfc9ba10e8"
+					}
+				}
+			],
+			"_postman_id": "e7f735c3-9c29-47aa-bdc2-2ae9221e6bcc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://swapi.dev/api/people/100",
+				"description": "Teste id invalido\nCT01- \nDado que acesso a API \nQuando adicinar um parametro invalido\nEntao o sistema retornara uma mensagem de erro"
+			},
+			"response": []
+		},
+		{
+			"name": "https://swapi.dev/api/people/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Luke Skywalker\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Luke Skywalker\");\r",
+							"    pm.expect(jsonData.height).to.eql(\"172\");\r",
+							"    pm.expect(jsonData.films[0]).to.eql(\"https://swapi.dev/api/films/1/\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "d13d3063-c725-40ac-8b37-1e5aaee95c9c"
+					}
+				}
+			],
+			"_postman_id": "77e43371-c2d8-4b72-b258-54751d94e43f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://swapi.dev/api/people/1",
+				"description": "Teste ID positivo\r\n\r\nCT01- \r\nDado que acesso a API\r\nQuando listo um ID \r\nEntao valido o retorno do id listado\r\n\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "people",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function name() {\r",
+							"\r",
+							"  var name = [\"1\", \"2\", \"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\" ]; \r",
+							"\r",
+							" var randomItem = name[Math.floor(Math.random() * name.length)];\r",
+							" \r",
+							" return randomItem;\r",
+							"}\r",
+							" pm.environment.set(\"name\", name());"
+						],
+						"type": "text/javascript",
+						"id": "b4dc1d15-99b0-4b76-a6fc-d9a20d889bb6"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check name is true\", function () {\r",
+							"    pm.expect(pm.environment.get(\"name\")).to.eql;\r",
+							"});\r",
+							"\r",
+							"console.log(JSON.parse(responseBody).name)\r",
+							"\r",
+							"pm.test(\"Check height is true\", function () {\r",
+							"    pm.expect(pm.environment.get(\"height\")).to.eql;\r",
+							"});\r",
+							"\r",
+							"console.log(JSON.parse(responseBody).height)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "ce32c0ef-d838-4c16-ba91-01b9f61dfd0e"
+					}
+				}
+			],
+			"_postman_id": "deadd38d-1ab4-46a4-a877-ea92f2cc4e50",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}",
+				"description": "Lista de pessoas\r\n\r\nCT01-\r\nDado que quero acessar a API\r\nQuando listo todas as pessoas\r\nEntao o sitema ir retornar toda lista"
+			},
+			"response": []
+		}
+	]
+}
